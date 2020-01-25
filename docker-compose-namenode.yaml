@@ -11,6 +11,11 @@ services:
         command: /opt/hadoop/bin/hdfs namenode
         networks:
             - clusternetwork
+        volumes:
+            - "/home/pi/docker_host/hdfs/id_rsa:/root/.ssh/id_rsa"
+            - "/home/pi/docker_host/hdfs/id_rsa.pub:/root/.ssh/id_rsa.pub"
+            - "/home/pi/docker_host/hdfs/conf:/opt/hadoop/etc/hadoop"
+            - "/home/pi/docker_host/persisted/hdfs:/data/dfs/data"
 networks:
     clusternetwork:
         external:
