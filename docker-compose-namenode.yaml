@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+    hadoop-namenode:
+        hostname: hadoop-namenode
+        image: local-hadoop:2.7.0
+        hostname: hadoop-namenode
+        ports:
+            - "50070:50070"
+            - "50075:50075"
+            - "9000:9000"        
+        command: hdfs namenode
+        networks:
+            - clusternetwork
+networks:
+    clusternetwork:
+        external:
+            name: multi-host-net   
