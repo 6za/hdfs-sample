@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+    hadoop-datanode1:
+        hostname: hadoop-datanode1
+        image: local-hadoop:2.7.0
+        hostname: hadoop-datanode1
+        ports:
+            - "50076:50076"
+            - "50011:50011"    
+        command: /opt/hadoop/bin/hdfs datanode -D dfs.datanode.http.address=0.0.0.0:50076 -D dfs.datanode.address=0.0.0.0:50011
+        networks:
+            - clusternetwork
+        volumes:
+            - "/home/pi/docker_host/hdfs/id_rsa:/root/.ssh/id_rsa"
+            - "/home/pi/docker_host/hdfs/id_rsa.pub:/root/.ssh/id_rsa.pub"
+            - "/home/pi/docker_host/hdfs/conf:/opt/hadoop/etc/hadoop"
+            - "/home/pi/docker_host/persisted/hdfs:/data/dfs/name"
+            - "/home/pi/docker_host/persisted/hdfs:/data/dfs/data"
+networks:
+    clusternetwork:
+        external:
+            name: multi-host-net   
