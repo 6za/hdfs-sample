@@ -1,0 +1,76 @@
+FROM ubuntu:16.04
+ 
+
+# expose various ports
+EXPOSE 8088 
+# dfs.http.address - master nodes
+EXPOSE 50070  
+# dfs.https.address  - master nodes
+EXPOSE 50470
+# fs.default.name - NameNode metadata service
+EXPOSE 8020  
+# fs.default.name - NameNode metadata service
+EXPOSE 9000  
+
+
+# dfs.datanode.http.address  - DataNode nodes
+EXPOSE 50075 
+# dfs.datanode.http.address  - DataNode nodes
+EXPOSE 50475 
+# dfs.datanode.address  - DataNode nodes
+EXPOSE 50010 
+# dfs.datanode.ipc.address  - DataNode nodes
+EXPOSE 50020 
+# mapred.job.tracker.http.address - JobTracker  WebUI
+EXPOSE 50030 
+# mapred.task.tracker.http.address - Task­Tracker Web UI and Shuffle
+EXPOSE 50060
+# dfs.secondary.http.address - Secondary NameNode
+EXPOSE 50090 
+
+# set environment vars
+ENV HADOOP_HOME /opt/hadoop
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-armhf
+ 
+# install packages
+RUN \
+  apt-get update && apt-get install -y \
+  ssh \
+  rsync \
+  vim \
+  openjdk-8-jdk \
+  wget libzip4 libsnappy1v5 libssl-dev \
+  rm -rf /var/lib/apt/lists/*
+ 
+ 
+# download and extract hadoop, set JAVA_HOME in hadoop-env.sh, update path
+RUN \
+  wget  http://apache.mirrors.tds.net/hadoop/common/hadoop-2.8.5/hadoop-2.8.5.tar.gz && \
+  tar -xzf hadoop-2.8.5.tar.gz && \
+  mv hadoop-2.8.5 $HADOOP_HOME && \
+  echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
+  echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc \
+  mkdir -p $HADOOP_HOME/logs \
+  rm /hadoop-2.8.5.tar.gz
+
+# create ssh keys
+#ADD configs/id_rsa /root/.ssh/id_rsa
+#ADD configs/id_rsa.pub /root/.ssh/id_rsa.pub
+#RUN chmod 0600 ~/.ssh/id* && \
+#RUN echo "test" && \
+#  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
+#  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
+#  chmod 0600 ~/.ssh/authorized_keys
+ 
+# copy ssh config
+#ADD configs/ssh_config /root/.ssh/config
+#ADD configs/slaves $HADOOP_HOME/etc/hadoop/ 
+# copy script to start hadoop
+#ADD start-hadoop-namenode.sh start-hadoop-namenode.sh
+#ADD start-hadoop-datanode.sh start-hadoop-datanode.sh
+ 
+# SSH
+EXPOSE 22 
+
+# start hadoop
+#CMD bash start-hadoop.sh
