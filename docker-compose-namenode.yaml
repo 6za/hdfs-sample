@@ -8,7 +8,7 @@ services:
             - "50070:50070"
             - "50075:50075"
             - "9000:9000"        
-        command: hdfs namenode
+        command: /opt/hadoop/bin/hdfs namenode
         networks:
             - clusternetwork
 networks:
