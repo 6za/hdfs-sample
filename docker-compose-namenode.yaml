@@ -15,7 +15,3 @@ services:
             - "/home/pi/docker_host/hdfs/id_rsa.pub:/root/.ssh/id_rsa.pub"
             - "/home/pi/docker_host/hdfs/conf:/opt/hadoop/etc/hadoop"
             - "/home/pi/docker_host/persisted/hdfs:/data/dfs/name"
-networks:
-    clusternetwork:
-        external:
-            name: multi-host-net   
