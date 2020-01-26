@@ -3,7 +3,6 @@ services:
     hadoop-namenode:
         hostname: hadoop-namenode
         image: local-hadoop:2.7.0
-        hostname: hadoop-namenode
         ports:
             - "50070:50070"
             - "50075:50075"
