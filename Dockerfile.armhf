@@ -37,7 +37,7 @@ RUN \
   apt-get update && apt-get install -y \
   ssh \
   rsync \
-  vim \
+  vim inetutils-ping telnet\
   openjdk-8-jdk \
   wget libzip4 libsnappy1v5 libssl-dev && \
   rm -rf /var/lib/apt/lists/*
