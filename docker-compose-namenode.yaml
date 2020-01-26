@@ -8,8 +8,6 @@ services:
             - "50075:50075"
             - "9000:9000"        
         command: /opt/hadoop/bin/hdfs namenode
-        networks:
-            - clusternetwork
         volumes:
             - "/home/pi/docker_host/hdfs/id_rsa:/root/.ssh/id_rsa"
             - "/home/pi/docker_host/hdfs/id_rsa.pub:/root/.ssh/id_rsa.pub"
