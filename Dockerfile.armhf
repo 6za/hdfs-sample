@@ -45,32 +45,14 @@ RUN \
  
 # download and extract hadoop, set JAVA_HOME in hadoop-env.sh, update path
 RUN \
-  wget  http://apache.mirrors.tds.net/hadoop/common/hadoop-2.8.5/hadoop-2.8.5.tar.gz && \
-  tar -xzf hadoop-2.8.5.tar.gz && \
-  mv hadoop-2.8.5 $HADOOP_HOME && \
+  wget  http://apache.mirrors.tds.net/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz && \
+  tar -xzf hadoop-3.2.1.tar.gz && \
+  mv hadoop-3.2.1 $HADOOP_HOME && \
   echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
   echo "PATH=$PATH:$HADOOP_HOME/bin" >> ~/.bashrc && \
   mkdir -p $HADOOP_HOME/logs && \
-  rm /hadoop-2.8.5.tar.gz
+  rm /hadoop-3.2.1.tar.gz 
 
-# create ssh keys
-#ADD configs/id_rsa /root/.ssh/id_rsa
-#ADD configs/id_rsa.pub /root/.ssh/id_rsa.pub
-#RUN chmod 0600 ~/.ssh/id* && \
-#RUN echo "test" && \
-#  ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
-#  cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
-#  chmod 0600 ~/.ssh/authorized_keys
- 
-# copy ssh config
-#ADD configs/ssh_config /root/.ssh/config
-#ADD configs/slaves $HADOOP_HOME/etc/hadoop/ 
-# copy script to start hadoop
-#ADD start-hadoop-namenode.sh start-hadoop-namenode.sh
-#ADD start-hadoop-datanode.sh start-hadoop-datanode.sh
- 
 # SSH
 EXPOSE 22 
 
-# start hadoop
-#CMD bash start-hadoop.sh
