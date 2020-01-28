@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     hadoop-datanode:
-        image: local-hadoop:2.7.0
+        image: local-hadoop:3.2.1
         restart: 'always'
         hostname: hadoop-datanode-0
         ports:
