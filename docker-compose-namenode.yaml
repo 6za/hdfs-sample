@@ -2,7 +2,7 @@ version: "3.7"
 services:
     hadoop-namenode:
         hostname: hadoop-namenode
-        restart: 'always'
+        restart: 'unless-stopped'
         image: local-hadoop:3.2.1
         ports:
             - "50070:50070"
