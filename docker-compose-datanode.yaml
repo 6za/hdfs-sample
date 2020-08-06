@@ -16,6 +16,6 @@ services:
             - "/home/pi/docker_host/hdfs/id_rsa.pub:/root/.ssh/id_rsa.pub"
             - "/home/pi/docker_host/hdfs/authorized_keys:/root/.ssh/authorized_keys"
             - "/home/pi/docker_host/hdfs/conf:/opt/hadoop/etc/hadoop"
-            - "/home/pi/docker_host/persisted/hdfs:/data/dfs/name"
-            - "/home/pi/docker_host/persisted/hdfs:/data/dfs/data"
+            - "/home/pi/docker_host/persisted/hdfs/dfs:/data/dfs"
+
 
