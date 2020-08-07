@@ -4,6 +4,8 @@ services:
         image: local-hadoop:3.2.1
         restart: 'unless-stopped'
         hostname: hadoop-datanode-0
+        enviroment: 
+            - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
         ports:
             - "50075:50075"
             - "50475:50475"
