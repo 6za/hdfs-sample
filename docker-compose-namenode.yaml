@@ -4,7 +4,7 @@ services:
         hostname: hadoop-namenode
         restart: 'unless-stopped'
         image: local-hadoop:3.2.1
-        enviroment: 
+        environment: 
             - HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
         ports:
             - "50070:50070"
